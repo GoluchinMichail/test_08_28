@@ -80,8 +80,8 @@ static void timer_10_cb (struct ev_loop *loop, ev_timer *w, int revents) {
         clock_t stamp = clock();
         printf ("Sent: %2u  %u   %u words\n", packet->Head.iNumber, stamp, packet->Head.iWords);
 // порча crc
-if (3==(3 & param->iCounter_Tick_10))
-memcpy (&packet->aBuffer[6], "ОШИБКА",6*2);
+// if (3==(3 & param->iCounter_Tick_10))
+// memcpy (&packet->aBuffer[6], "ОШИБКА",6*2);
         int err = sendto (param->sock, packet, sizeof(packet->Head) + (packet->Head.iWords * sizeof(packet->aBuffer[0])), 0, (struct sockaddr*)&param->Sin, sizeof(param->Sin));
         if (err<=0)
             perror ("sendto");
