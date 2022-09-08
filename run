@@ -1,0 +1,31 @@
+
+#   BASH  XTERM
+
+if [ "${*}" == "" ]; then
+
+    #if [ -f log__Received ]; then
+    rm  log__*
+    #fi
+
+    # запуск приёмника  (ЭТОТ-ЖЕ СКРИПТ) в другом окне
+    ${TERM}  -e  ${0} QWERTY  &
+
+    # дать развернуться приёмнику
+    sleep 2
+
+    # запуск передатчика
+    echo Press ESC to exit ...
+    build/sent  127.0.0.1  1234     >   log__sent
+
+else
+    # запуск приёмника
+
+    echo Press ESC to exit ...
+    build/received     1234   15    >   log__recv
+
+    # создать журналы по приёму
+
+    grep Received:  <   log__recv   >   log__Received
+
+    grep Processed: <   log__recv   >   log__Processed
+fi
