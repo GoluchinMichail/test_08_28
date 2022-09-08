@@ -10,6 +10,7 @@
 
 
 2022.08.31
+
 сборка:
     mkdir build
     cd build
